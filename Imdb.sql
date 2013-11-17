@@ -16,10 +16,9 @@ CREATE TABLE Celebrity
   Id number(10) PRIMARY KEY,
   Name varchar(50) not null,
   Date_of_Birth date not null,
-  Height  number(2,2),
-  Mini_Bio blob,
-  Trade_Mark varchar(50),
-  Trivia blob
+  Height  number(4,2),
+  star_sign varchar(15)
+  
 );
 
 CREATE TABLE Category
@@ -35,8 +34,8 @@ CREATE TABLE Title
   Type varchar2(20) not null check (Type in ('TV Series','Tv Eisode','TV Mini-Series','Video', 'Short','Film','Tv Movie', 'Video Game' )),
   Certificate varchar(5) ,
   Duration number(3),
-  Introduction varchar2(100),
-  Storyline varchar2(200),
+  Introduction varchar2(200),
+  Storyline varchar2(500),
   Release_Date date
   
   );
@@ -142,3 +141,17 @@ CREATE TABLE Title_Genre
   
 );
 
+
+--create sequences 
+drop  SEQUENCE TITLE_SEQ;
+drop SEQUENCE Char_SEQ;
+drop SEQUENCE Celeb_SEQ;
+drop SEQUENCE user_SEQ;
+CREATE SEQUENCE TITLE_SEQ MINVALUE 1 MAXVALUE
+  999999 INCREMENT BY 1 START WITH 1 CACHE 20 ;
+CREATE SEQUENCE Char_SEQ MINVALUE 1 MAXVALUE
+  999999 INCREMENT BY 1 START WITH 1 CACHE 20 ;
+CREATE SEQUENCE Celeb_SEQ MINVALUE 1 MAXVALUE
+  999999 INCREMENT BY 1 START WITH 1 CACHE 20 ;
+CREATE SEQUENCE user_SEQ MINVALUE 1 MAXVALUE
+  999999 INCREMENT BY 1 START WITH 1 CACHE 20 ;
