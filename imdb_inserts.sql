@@ -2,7 +2,7 @@ INSERT
 INTO
   users VALUES
   (
-    user_seq.nextval,
+     user_seq.nextval,
     'ldantes',
     '**********',
     sysdate,
@@ -14,9 +14,10 @@ INTO
     'xxxx',
     'Ireland',
     'First pets name',
-    'xxxx'
+    'Goldie'
   );
-
+  
+describe users;
 INSERT
 INTO
   users VALUES
@@ -33,7 +34,7 @@ INTO
     'xxxx',
     'Ireland',
     'First pets name',
-    'xxxx'
+    'Spike'
   );
   
   INSERT
@@ -68,6 +69,7 @@ INTO
   sysdate
   
   );
+
   
    insert into Title values
 (
@@ -93,22 +95,44 @@ INTO
   
   insert into involvement values(2,2,'actor');
   insert into involvement values(2,1,'actor');
-  select c.name,t.name , cat.category from celebrity c, title t, category cat, involvement i where t.id =i.title_id and c.id = i.celebrity_id and cat.category = i.category;
-  
-  
-  insert into user_rating values(1,1,9,sysdate);
-  insert into user_rating values(2,1,3,sysdate);
-  insert into user_rating values(3,1,8,sysdate);
-   insert into user_rating values(1,2,7,sysdate);
-  insert into user_rating values(2,2,8,sysdate);
-  insert into user_rating values(3,2,10,sysdate);
-  
-  update user_rating set score = 10.1 where user_id = 1 and title_id =1;
-  insert into user_rating_log values(1,sysdate);
-  insert into user_rating_log values(1,sysdate);
-  select * from title;
-  
-  commit;
-  drop trigger USER_RATING_AI;
+  insert into involvement values(1,1,'actor');
  
+  insert into characters values (char_seq.nextval, 'Gyp Rosetti', 'Ruthless villian');
+  insert into characters values (char_seq.nextval, 'Chalky White', 'Leader and primary caretaker of Atlantic County''s black population');
+  insert into characters values (char_seq.nextval, 'Omar Little', 'Robbing Hood');
+  
+  insert into character_appearences values (1,1,1);
+  insert into character_appearences values (2,1,2);
+  insert into character_appearences values (3,2,2);
+  
+  
+  
+
+
+  insert into genre values ('drama');
+  insert into genre values ('crime');
+  insert into genre values ('thriller');
+  insert into genre values ('history');
+  
+  insert into title_genre values(1,'drama');
+  insert into title_genre values(1,'history');
+  insert into title_genre values(1,'crime');
+  insert into title_genre values(2,'drama');
+  insert into title_genre values(2,'crime');
+  insert into title_genre values(2,'thriller');
+  
+  -- Query demonstrating typic application queries and illustrating use of indexes.
+  
+  -- Query All Title and genre
+    select t.name, g.genre from title t, title_genre g where t.id = g.title_id;
+  -- Query to display the title, user and review
+  select t.name ,u.First_Name, r.score, r.review from title t, review r, users u where r.title_id = t.id and u.id = r.user_id;
+  -- displays all actors, associated titles and characters portrayed
+    select c.name,t.name as title , ch.character_name from celebrity c, title t, characters ch, character_appearences i where t.id =i.title_id and c.id = i.celebrity_id and ch.id = i.character_id;
+  -- displays all actors, associated titles and their involvement in the title
+    select c.name,t.name , cat.category from celebrity c, title t, category cat, involvement i where t.id =i.title_id and c.id = i.celebrity_id and cat.category = i.category;
+  -- Select a title by name
+  select * from title where name ='The Wire';
+  commit;
+  
   

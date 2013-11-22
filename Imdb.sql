@@ -20,6 +20,9 @@ CREATE TABLE Celebrity
   star_sign varchar(15)
   
 );
+  drop index celeb_index;
+    CREATE INDEX celeb_index
+ON Celebrity (name);
 
 CREATE TABLE Category
 (
@@ -39,7 +42,10 @@ CREATE TABLE Title
   Release_Date date
   
   );
-
+  drop index title_index;
+    CREATE INDEX title_index
+ON title (name);
+  
 CREATE TABLE Involvement
 (
   Celebrity_Id number(10) ,
@@ -54,6 +60,8 @@ CREATE TABLE Involvement
   CONSTRAINT Inv_Category FOREIGN KEY (Category)
         REFERENCES category(category)
 );
+
+
 
 CREATE TABLE Users
 (
@@ -78,13 +86,20 @@ CREATE TABLE Review
   User_Id number(10),
   Title_Id number(10),
   Score number(1),
-  Review blob,
+  Review varchar(500),
   primary key(user_id,title_Id),
    CONSTRAINT Rev_User_Id FOREIGN KEY (User_Id)
         REFERENCES users(id),
    CONSTRAINT Rev_Title_Id FOREIGN KEY (Title_Id)
         REFERENCES Title(id)
 );
+drop index Rev_title_index;
+    CREATE INDEX Rev_title_index
+ON review (Title_Id);
+
+drop index Rev_user_index;
+    CREATE INDEX Rev_user_index
+ON review (User_Id);
 
 CREATE TABLE User_Rating
 (
@@ -103,9 +118,12 @@ CREATE TABLE Characters
 (
   Id number(10),
   Character_Name varchar(50)  NOT NULL,
-  Biography blob,
+  Biography varchar(200),
   PRIMARY KEY (Id)
 );
+drop index char_index;
+    CREATE INDEX char_index
+ON Characters (Character_Name);
 
 CREATE TABLE Character_appearences
 (
@@ -122,6 +140,18 @@ CREATE TABLE Character_appearences
         REFERENCES Title(id)
   
 );
+
+drop index CA_title_index;
+    CREATE INDEX CA_title_index
+ON Character_appearences (Title_Id);
+
+drop index CA_celeb_index;
+    CREATE INDEX CA_celeb_index
+ON Character_appearences (Celebrity_Id);
+
+drop index CA_char_index;
+    CREATE INDEX CA_char_index
+ON Character_appearences (Character_id);
 
 CREATE TABLE Genre
 (
